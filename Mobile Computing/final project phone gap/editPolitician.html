@@ -1,0 +1,43 @@
+<%
+from bottle import request
+
+result = c.execute("SELECT name FROM personalInfo")
+
+%>
+
+
+<!DOCTYPE html>
+<html lang = "en-us">
+    <head>
+    <link rel="stylesheet"
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta name="viewport" content="width=device-width, user-scalable=false;">
+	<link rel="stylesheet" href="/static/politicianTheme.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="/static/politicianTheme.css" />
+    </head>
+
+    <body>
+        <div data-role = "page" data-theme = "a" >
+        <div data-role = "header" data-position = "fixed">
+        <h1>Edit Politician</h1>
+        </div>
+        <fieldset>
+        <form action = "/edit/politician"
+              method = "post">
+                <select name = "personalInfo.ID">
+                    %for record in result:
+                    <option value = "{{record[0]}}">{{record[0]}}</option>
+                    %end
+                </select>
+                <button type = "submit">
+                    Update Politician
+                </button>
+            </fieldset>
+
+        </form>
+    </body>
+
+</html>

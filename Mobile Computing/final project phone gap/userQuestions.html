@@ -1,0 +1,92 @@
+<%
+result = c.execute("SELECT * FROM issuesView")
+%>
+<!DOCTYPE html>
+<html lang = "en-us">
+<head>
+ <link rel="stylesheet"
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="/static/politicianTheme.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="/static/politicianTheme.css" />
+	<link rel="apple-touch-icon" href="icon.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+</head>
+<body>
+     <div data-role = "page" data-theme = "a" >
+     <div data-role = "header" data-position = "fixed">
+    <h1>Answer the following questions</h1>
+    </div>
+    <ul data-role = "listview">
+    %for result in result:
+        <li>{{result[0]}}</li>
+        <li>{{result[1]}}</li>
+        <li>{{result[2]}}</li>
+        %end
+    </ul>
+    <form action = "/compareResults"
+              method = "post">
+            <fieldset>
+
+                <label>Name: </label>
+                <input type = "text"
+                       name = "userName"
+
+                <label>Responses: </label>
+                <select name = "response1">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <select name = "response2">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <select name = "response3">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <select name = "response4">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <select name = "response5">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <select name = "response6">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <select name = "response7">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <select name = "response8">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <select name = "response9">
+                <option value = "Yes"> Yes</option>
+                <option value = "No"> No</option>
+                </select>
+
+                <button type = "submit">
+                    Submit
+                </button>
+            </fieldset>
+            </form>
+
+</body>
+</html>

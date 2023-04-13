@@ -1,0 +1,43 @@
+<%
+from bottle import request
+
+%>
+<!DOCTYPE html>
+<html lang = "en=us">
+    <head>
+    <link rel="stylesheet"
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta name="viewport" content="width=device-width, user-scalable=false;">
+	<link rel="stylesheet" href="/static/politicianTheme.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="/static/politicianTheme.css" />
+    </head>
+
+    <body>
+        <%
+        name = request.forms.get("personalInfo.ID")
+        result = c.execute("SELECT personalInfo.ID FROM personalInfo WHERE personalInfo.name = ?", (name,))
+        result = result.fetchone()[0]
+        result = int(result)
+        %>
+
+        %c.execute("DELETE FROM personalInfo WHERE personalInfo.ID = ?", (result,))
+        %c.execute("DELETE FROM aggregateAccount WHERE aggregateAccount.ID = ?", (result,))
+        %c.execute("DELETE FROM biography WHERE biography.ID = ?", (result,))
+        %c.execute("DELETE FROM responseLink WHERE personalInfoID = ?", (result,))
+
+        %db.commit()
+        <div data-role = "page" data-theme = "a" >
+     <div data-role = "header" data-position = "fixed">
+    <h1>{{name}} deleted!</h1>
+    </div>
+
+        <button type = "button"
+            onclick = "document.location.href = '/menu'">
+            return to main
+        </button>
+    </body>
+
+</html>

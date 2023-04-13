@@ -1,0 +1,61 @@
+Comments Collection Queries:
+1. Write a MongoDB query to display the total number of documents in the collection
+comments.
+
+db.comments.find().count()
+
+2. Write a MongoDB query to display the name of people who wrote the 5 latest
+comments.
+
+db.comments.find().sort({date:-1}).limit(5)
+
+3. Write a MongoDB query to count for each name(person), how many comments
+he/she wrote.
+db.comments.aggregate([{$group: {_id : '$name', count : {$sum : 1}}}])
+
+4. Write a MongoDB query to find out the names who has written over 300 comments.
+db.comments.aggregate([{$group: {_id : '$name', count : {$gt : 300}}}])
+
+5. Write a MongoDB query to find out the top 3 names who posted more comments than
+others. 
+db.comments.aggregate([{$group : {_id : "$name", count : {$sum : 1}}},{$sort: {"count":-1}}])
+
+
+Movies Collection Queries:
+6. Write a MongoDB query to display any 5 movies which are made in the year 2000.
+db.movies.find({"year":2000}).limit(5)
+
+7. Write a MongoDB query to display a movie with the lowest imdb rating.
+db.movies.find().sort({"imbd.rating": 1}).limit(1)
+
+8. Write a MongoDB query to display the top 5 movies (display only title and awards)
+with most awards.
+
+db.movies.find({"title", "awards"}).sort({"awards.wins"}).limit(5)
+
+9. Write a MongoDB query to display the highest number of awards won by a movie.
+
+db.movies.aggregate([{$group: {_id: "", count: { $max:"$awards.wins"}}}])
+
+10. Write a MongoDB query to display any 5 movies with both the condition: genres is
+“Adventure” and cast is “Tom Hanks”.
+
+db.movies.find( { $and:[ {"genres":{$all:["Adventure"]}}, {"cast":{$all:["Tom Hanks"]}} ] } ).limit(5)
+
+11. Write a MongoDB query to display average number of awards won by a movie.
+
+db.movies.aggregate( [ { $group: {_id: "", num: { $sum:"$awards.wins" }}}])
+
+12. Write a MongoDB statement to do the following: for all comments of “Andrea Le”,
+“join” the comments with movies that results in embedding movie information to the
+comments (Please use movie_id of comments and _id of movies to find the movie
+information).
+
+db.comments.find().forEach({"$name": "Andrea Le"},
+  function(result){
+    movie_id = result.movie_id;
+    com_id = result._id;
+    movie_info = db.movies.findOne({_id:movie_id});
+    db.comments.update({_id:com_id}, {$set:{"movie_info":movie_info}});
+  }
+)

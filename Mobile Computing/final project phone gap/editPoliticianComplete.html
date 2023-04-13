@@ -1,0 +1,53 @@
+<%
+from bottle import request
+
+userID = request.forms.get("userID")
+
+politicianName = request.forms.get("politicianName")
+politicianEmail = request.forms.get("email")
+politicianBirth = request.forms.get("birthday")
+politicianBio = request.forms.get("biography")
+politicianParty = request.forms.get("party")
+
+
+c.execute("UPDATE personalInfo SET name = ? WHERE personalInfo.ID = ?", (politicianName, userID))
+c.execute("UPDATE personalInfo SET email = ? WHERE personalInfo.ID = ?", (politicianEmail, userID))
+c.execute("UPDATE personalInfo SET BirthDate = ? WHERE personalInfo.ID = ?", (politicianBirth, userID))
+c.execute("UPDATE biography set name = ? WHERE biography.ID = ?", (politicianBio, userID))
+
+partyResult = c.execute("SELECT party.ID FROM party WHERE party.name = ?", (politicianParty,))
+partyID = partyResult.fetchone()[0]
+partyID = int(partyID)
+c.execute("UPDATE aggregateAccount SET partyID = ? WHERE personalInfoID = ?", (partyID, userID))
+
+db.commit()
+
+%>
+<!DOCTYPE html>
+<html lang = "en-us">
+    <head>
+     <link rel="stylesheet"
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta name="viewport" content="width=device-width, user-scalable=false;">
+	<link rel="stylesheet" href="/static/politicianTheme.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="/static/politicianTheme.css" />
+    </head>
+
+    <body>
+        <div data-role = "page" data-theme = "a" >
+     <div data-role = "header" data-position = "fixed">
+    <h1>Politician Updated!</h1>
+    </div>
+
+        <p>Name:{{politicianName}}</p>
+    </body>
+
+    <button type = "button"
+            onclick = "document.location.href = '/menu'" >
+        return to menu
+    </button>
+
+</html>
