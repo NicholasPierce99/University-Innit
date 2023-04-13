@@ -1,0 +1,142 @@
+<head>
+    <link rel="stylesheet" href="styling.css">
+
+</head>
+
+<header>
+    <div class="container">
+      <h1>Reddit Vaccine Myths Blog Post</h1>
+      <p>
+        <small>By <em>Nick Pierce</em> | Posted on:
+          <em>05/09/2021</em></small>
+      </p>
+    </div>
+  </header>
+  <main>
+    <article class="container">
+      <img src="reddit.jpg" alt="reddit alien" class="img--align-left" width = "300" height = "250" />
+      <h2>Vaccine Myths Introduction</h2>
+      <p>
+        In the current climate of swift vaccine rollout, there has been a growing trend of people taking to forums to
+        discuss “differing” “scientific” opinions, or to just talk about myths/conspiracies about the nature
+        of vaccines. VaccineMyths (r/VaccineMyths), is a subreddit where people discuss about various
+        Vaccine Myths. As this is a public forum, the data might contain a small percent of harsh language.
+      </p>
+      <p>
+        This blog will mainly pose to show the growing negative sentiment towards vaccines coming from a large number of forum posts,
+        and how the "subreddit" nature of reddit can breed negative discussion and negative echochambers. We'll take a look at several facets of
+        of the posts, like number of posts/year, language involved in said posts, length of posts, etc to see if this hypothesis has some merit.
+      </p>
+      <h2>Reddit Post Analysis</h2>
+      <p>
+        Now there are many aspects to these reddit posts that we can look at, but first I'd like to briefly go over the data contents. Data contains both posts and comments. Both posts and comments contains the following fields:
+
+      </p>
+      <p>
+        <ul>
+        <li> title - relevant for posts</li>
+        <li> score - relevant for posts - based on impact, number of comments</li>
+        <li>id - unique id for posts/comments</li>
+        <li>url - relevant for posts - url of post thread</li>
+        <li>commns_num - relevant for post - number of comments to this post</li>
+        <li>created - date of creation</li>
+        <li>body - relevant for posts/comments - text of the post or comment</li>
+        <li>timestamp - timestamp</li>
+    </ul>
+      </p>
+      <p>
+          Now we can see several key things about the data in particular that will be used, primarily we'll be using timestamps, titles, and comments.
+      </p>
+      <h3>Timeline</h3>
+      <p>
+        We see something very interesting from scraping the title count and plotting them against the year. Specifically a major spike in posts in 2019/2020. These spikes can be attributed to two key
+      worldwide events that occurred.<a href="https://www.cidrap.umn.edu/news-perspective/2019/08/global-measles-outbreaks-make-2019-record-setting-year"> 2019 Measles outbreak</a> and obviously importantly was 
+      <a href="https://www.ajmc.com/view/a-timeline-of-covid19-developments-in-2020"> Covid.</a> We will discuss the actual contents of these posts later, but establishing a timeline of events is important especially to show
+      the increased usage of forums to talk about these topics.
+      <br>
+      </br>
+        <img src="posts-year.png" alt="timeline" align = "left" width = "1000" height = "650" />
+      </p>
+      <h3> Post Word Correlation</h3>
+      <p>
+      Now I can blatantly assert that the two spikes in posts were attributed to those worldwide events, but how do I prove it? Well firstly before talking about the actual "feelings" of any of the posts, let's establish
+      word patterns, or how do the words in the posts relate to one another, are they all random posts or are there greater themes we can make out to assert this growing trend of vaccine discussion. One of the ways we can do this is by making a correlation plot 
+      or how the words in posts relate to each other. 
+      <br>
+      </br>
+      <img src="corr.png" alt="timeline" align = "left" width = "1000" height = "650" />
+      <br>
+    </br>
+
+    This analysis in particular is very interesting, we've now extracted themes among the words that are present in the posts and can relate these themes back to anti-vaccination rhetoric and the two worldwide events discussed earlier.
+    Firstly as the measles outbreak was much more prevalent in the posts it'll be the main focus, we already see this in the "measles-mmr vaccine", we can also see links to mercury and thimerosal two "controversial" vaccine materials that are commonly cited by anti-vaxxers as being dangerous substances, as well as
+    the "children-study-vaccination" correlation that we have heard far too much about how there are xyz studies that prove vaccinating children causes xyz. My goal with this post is not to discuss the intricacies of anti-vaccination talking points, more to establish a growing sentiment of anti-vaccination as posed in the original hypothesis.
+
+      </p>
+    <h3> Sentiment Analysis</h3>
+    <p>
+      So now we have some interesting conclusions reached, we have growing posts about vaccines throughout the years and we have theme trails connecting the language in the posts to common anti-vaccination rhetoric. But at the end of the day, does this really matter? Does this inherently mean that their opinions are wrong or negative in any way? 
+      In general, we can't necessarily say that it is, who's to say that one post is negative or positive, it's all relative right? Well data scientists and analysts would whole heartedly disagree. To decipher the meaning or "feeling" behind the words in a piece of text, we commonly consult databases of sentiment. Sentiment databases are a list
+      of words that have an attached label indicating whether they are positive or negative objectively in the English language. We can use this database in conjunction with our words found earlier and see what kind of labels are placed on the posts.
+
+      <br></br>
+
+      <img src="sentiment.png" alt="sentiment" align = "left" width = "1000" height = "650" />
+    </p>
+    <br></br>
+    <p>
+      Ah this graph in particular really sends the message home, we can see overwhelmingly negative sentiments for posts regarding the vaccines in this subreddit. It isn't really comparable how objectively negative the posts are, and this is indicative of the fact that the subreddit is overall negative and breeds negativity. The language and rhetoric is 
+      not conducive to "positive" discussion and can really be dangerous to people who are especially not up-to-date in this topic. But you may be asking yourself, blog-man what if the words are just taken out of context? There are plenty of negative words that exist but don't necessarily mean the overall themes are negative. And yes non-descript comment person
+      you are correct, we can not for sure say what words are contributing to the negative sentiment. But there is a method to beautifully show the words that are the most common in posts, and by visualizing it via a word cloud, we can see what I mean by the post content is not randomly "negative"
+    </p>
+    <h4> Word Cloud!</h4>
+    <p>
+      Who doesn't love a good word cloud? Let's see what words are contributing in frequency to the posts.
+      <br></br>
+      <img src="wordcloud.PNG" alt="wordcloud" align = "left" width = "1000" height = "650" />
+      <br> </br>
+      I don't really have to say much here, the proof is in the pudding.
+    </p>
+    <h3> Smoking Gun, Where is the Covid????</h3>
+    <p>
+      So you've made it this far and my graphs/analysis have been pretty convincing right? But there's been something on your mind as you've made it all the way here, if the data is current and has posts from 2020-2021, why are they mainly focused on the measles outbreak? Should this not be a bigger issue that takes precedence? 
+      Bravo astute reader you've done it again, you make a great point, there should be an overwhelmingly large amount of posts about Covid and the vaccines, so where are they? To answer this question we need to put on our investigation hats, let's look at the subreddit and the dataset to see if we can come to some conclusions.
+      <br> </br>
+      <img src="searches.png" alt="searches" align = "left" width = "500" height = "200" />
+      <iframe id="reddit-embed" src="https://www.redditmedia.com/r/VaccineMyths/comments/223dj9/typical_debate_with_an_antivaxer_im_teal/?ref_source=embed&amp;ref=share&amp;embed=true" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="661" width="640" scrolling="no"></iframe>
+      <iframe id="reddit-embed" src="https://www.redditmedia.com/r/VaccineMyths/comments/1vfnb9/why_trust_scientists/?ref_source=embed&amp;ref=share&amp;embed=true" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="508" width="640" scrolling="no"></iframe>
+      <br> </br>
+      <p>
+        I took the liberty of embedding some of the highest rated posts on the subreddit so you can have fun looking at them as they are pretty funny, notice anything? Maybe you did maybe you didn't, let's also take a look at the individual data, and see if "covid" or "pfizer/moderna" show up. We see very low counts of some key phrases, so what gives?
+        As much as I'd like to say that the moderators are evil and there's a conspiracy to remove anti-vaccine rhetoric, but if you look closely at the dates, the posts are simply.... old. As unfun as this answer is, the subreddit is pretty much just dead the dates of the posts in the dataset, and browsing the subreddit for post frequency, agree with this conclusion. It's a time capsule of peak 2019 anti measles vaccine culture and that's about as much as there is to it, plain and simple.
+      <br> </br>
+
+      </p>
+
+    </p>
+
+    <h3> Conclusions</h3>
+    <p>
+      At the end of the day, the content of these posts is definitely interesting to look at, and definitely displays an increasing awareness and realization that anti-vaccine rhetoric is overwhelmingly negative and widespread. The consequences of unchecked discourse like these subreddits may lead to some incredibly false conclusions and borderline radicalization about anti-scientific facts. 
+      Though in this particular case, it seems as though the individuals that were a part of this subreddit disbanded, and moved to much more popular subreddits like r/covid, etc to have more focused discussions. Hopefully you enjoyed my analysis and traversing the same thought-structure that I did as I was doing this post, it was a lot of fun to do.
+    </p>
+    </article>
+    </main>
+    <footer>
+      <div class="container">
+        <h1>Sources/Explanation</h1>
+        <p>
+          In terms of existing research/analysis most of the existing work is simply performing sentiment analysis and word clouding. None of the existing work tries to draw real world conclusions, which is one of the main things I focused on.
+          In terms of guides or things I utilized/followed: 
+          <p>
+            <br> </br>
+            <a href="Reddit.com/r/VaccineMyths">Vaccine Myths Subreddit</a>
+            <br> </br>
+            <a href="https://www.kaggle.com/gpreda/reddit-vaccine-myths"> Kaggle post, I flipped through several of the kaggle posts linked to the dataset for inspiration or help with using visualization libraries</a>
+
+          </p>
+        </p>
+      </div>
+    </footer>
+  </main>
+  

@@ -1,0 +1,50 @@
+// $Id: assignment4.mpc 378 2010-02-07 22:09:38Z hillj $
+
+project (assignment4) {
+  exename = assignment4
+  install = .
+ 
+  specific (make, gnuace) {
+    compile_flags += -std=c++11
+  }
+
+  Source_Files {
+      Expr_Node.cpp
+      Expr_Tree_Builder.cpp
+      Eval_Expr_Tree.cpp
+      Number_Expr_Node.cpp
+      Binary_Expr_Node.cpp
+      Unary_Expr_Node.cpp
+      Divide_Expr_Node.cpp
+      Modulo_Expr_Node.cpp
+      Multiply_Expr_Node.cpp
+      Add_Expr_Node.cpp
+      Subtract_Expr_Node.cpp
+	  Calculator.cpp
+      Driver.cpp
+  }
+
+  Template_Files {
+    Array_Base.cpp
+    Array.cpp
+    Stack.cpp
+  }
+  Header_Files {
+      Array_Base.h
+      Array.h
+      Stack.h
+      Expr_Node.h
+      Expr_Tree_Builder.h
+      Expr_Node_Visitor.h
+      Eval_Expr_Tree.h
+      Number_Expr_Node.h
+      Binary_Expr_Node.h
+      Unary_Expr_Node.h
+      Divide_Expr_Node.h
+      Modulo_Expr_Node.h
+      Multiply_Expr_Node.h
+      Add_Expr_Node.h
+      Subtract_Expr_Node.h
+	  Calculator.h
+  }
+}

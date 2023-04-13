@@ -1,0 +1,1 @@
+//hotel client clients can make reservations and view hotel rooms
