@@ -1,0 +1,20 @@
+problem statement:
+some array A[0], A[1],.....A[N] (n is divisible by 2)
+each value of A increase up to index p, then decrease
+we want to find the p index at which the peak value occurs and what is the peak value
+
+Divide and Conquer algorithm:
+Essentially we can apply the same methodology as a binary search for this problem
+Applying the same principles:
+
+given an array of n elements 
+check if the middle element is the peak, (constant time)
+if it is not the peak, check the right element: (n/2 work units)
+if the right element is greater than the middle element, 
+there were always be a peak in the right side
+do the same principle for the left side(n/2 work units)
+resetting the middle to be the middle of the left side or right side,
+element greater than middle or smaller (n/4 work units)
+etc.... repeat until we find the peak. 
+
+Which gives us a running time of n/2^i work units = O(log(n)) 
