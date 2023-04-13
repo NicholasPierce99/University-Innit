@@ -1,0 +1,86 @@
+<%
+from bottle import request
+import sqlite3
+
+i = 0
+j = 1
+k = 0
+l = 0
+name = request.forms.get("name")
+birthDate = request.forms.get("birthDate")
+email = request.forms.get("email")
+biography = request.forms.get("description")
+partyResponse = request.forms.get("party")
+
+response1 = request.forms.get("response1")
+response2 = request.forms.get("response2")
+response3 = request.forms.get("response3")
+response4 = request.forms.get("response4")
+response5 = request.forms.get("response5")
+response6 = request.forms.get("response6")
+response7 = request.forms.get("response7")
+response8 = request.forms.get("response8")
+response9 = request.forms.get("response9")
+
+responseArray = [response1, response2, response3, response4, response5, response6, response7, response8, response9]
+for x in responseArray:
+    if responseArray[l] == 'Yes':
+        responseArray[l] = 1
+        l = l + 1
+    else:
+        responseArray[l] = 2
+        l = l + 1
+end
+end
+
+count = c.execute("SELECT name FROM personalInfo")
+for result in count:
+    i = i + 1
+end
+i = i + 1
+
+c.execute("INSERT INTO personalInfo VALUES (null, ?, ?, ?)",(name, birthDate, email,))
+c.execute("INSERT INTO BIOGRAPHY VALUES (null, ?)",(biography,))
+
+
+while j <= 3:
+    c.execute("INSERT INTO responseLink VALUES (null, ?, ?, ?, ?, ?, ?, ?)", (i, j, responseArray[0 + k], j, responseArray[1 + k], j, responseArray[2 + k]))
+    j = j + 1
+    k = 3
+
+end
+
+party = c.execute("SELECT party.ID FROM party WHERE party.name = ?", (partyResponse,))
+partyID = party.fetchone()[0]
+partyID = int(partyID)
+
+c.execute("INSERT INTO aggregateAccount VALUES (null, ?, ?, ?)",(i, partyID, i))
+
+db.commit()
+%>
+
+
+<html lang = "en-us">
+    <head>
+    <link rel="stylesheet"
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta name="viewport" content="width=device-width, user-scalable=false;">
+	<link rel="stylesheet" href="/static/politicianTheme.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="/static/politicianTheme.css" />
+    </head>
+
+    <body>
+       <div data-role = "page" data-theme = "a" >
+     <div data-role = "header" data-position = "fixed">
+    <h1>{{ name }} added to database!</h1>
+    </div>
+
+    <button type = "button"
+        onclick = "document.location.href = '/menu'">
+        return to main
+    </button>
+    </body>
+</html>

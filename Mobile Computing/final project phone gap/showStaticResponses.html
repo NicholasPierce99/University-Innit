@@ -1,0 +1,39 @@
+<%
+""" connect to database and query all customers """
+result = c.execute("SELECT * FROM responseView")
+%>
+
+<!DOCTYPE html>
+<html lang = "en-us">
+<head>
+     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta name="viewport" content="width=device-width, user-scalable=false;">
+	<link rel="stylesheet" href="/static/politicianTheme.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="/static/politicianTheme.css" />
+</head>
+<body>
+    <div data-role = "page" data-theme = "a" >
+    <div data-role = "header" data-position = "fixed">
+    <h1>Show Responses</h1>
+     </div>
+    <ul data-role = "listview">
+    %for result in result:
+        <li>{{result[0]}}</li>
+        <li>{{result[1]}}</li>
+        <li>{{result[2]}}</li>
+        <li>{{result[3]}}</li>
+        <li>{{result[4]}}</li>
+        <li>{{result[5]}}</li>
+        <li>{{result[6]}}</li>
+        %end
+    </ul>
+
+    <button type = "button"
+            onclick = "document.location.href = '/menu'">
+        return to main
+    </button>
+</body>
+</html>

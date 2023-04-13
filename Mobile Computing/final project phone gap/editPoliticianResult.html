@@ -1,0 +1,76 @@
+<%
+from bottle import request
+
+name = request.forms.get("personalInfo.ID")
+result = c.execute("SELECT personalInfo.ID FROM personalInfo WHERE personalInfo.name = ?", (name,))
+result = result.fetchone()[0]
+
+result = int(result)
+
+politicianInfo = c.execute("SELECT * FROM personalInfo WHERE personalInfo.ID = ?", (result,))
+politicianEmail = politicianInfo.fetchone()[3]
+politicianInfo2 = c.execute("SELECT * FROM personalInfo WHERE personalInfo.ID = ?", (result,))
+politicianBirth = politicianInfo2.fetchone()[2]
+politicianInfo3 = c.execute("SELECT * FROM biography WHERE biography.ID = ?", (result,))
+politicianBio = politicianInfo3.fetchone()[1]
+
+%>
+
+<!DOCTYPE html>
+<html lang = "en-us">
+    <head>
+           <link rel="stylesheet"
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta name="viewport" content="width=device-width, user-scalable=false;">
+        <meta charset = "utf-8">
+    </head>
+
+    <body>
+        <div data-role = "page" data-theme = "a" >
+     <div data-role = "header" data-position = "fixed">
+    <h1>Edit a Politician</h1>
+    </div>
+    <form action = "/edit/politician/complete"
+              method = "post">
+            <fieldset>
+
+                <label>Name: </label>
+                <input type = "text"
+                       name = "politicianName"
+                       value = "{{name}}" /><br />
+
+                <label>Email: </label>
+                <input type = "text"
+                       name = "email"
+                       value = "{{politicianEmail}}" /><br />
+                <label>Birthday: </label>
+                <input type = "text"
+                       name = "birthday"
+                       value = "{{politicianBirth}}" /><br />
+                <label>Biography</label>
+                <input type = "text"
+                        name = "biography"
+                        value = "{{politicianBio}}" /><br />
+
+                <input type = "hidden"
+                       name = "userID"
+                       value = "{{result}}" /><br />
+
+            %partyResult = c.execute("SELECT name FROM party")
+                <label>Party</label>
+            <select name = "party">
+                    %for record in partyResult:
+                    <option value = "{{record[0]}}">{{record[0]}}</option>
+                    %end
+                </select>
+
+                <button type = "submit">
+                    Update this Politician
+                </button>
+            </fieldset>
+        </form>
+    </body>
+
+</html>

@@ -1,0 +1,126 @@
+<%
+from bottle import request
+userName = request.forms.get("userName")
+l = 0
+i = 1
+k = 3
+m = 0
+compareScore = 0
+
+response1 = request.forms.get("response1")
+response2 = request.forms.get("response2")
+response3 = request.forms.get("response3")
+response4 = request.forms.get("response4")
+response5 = request.forms.get("response5")
+response6 = request.forms.get("response6")
+response7 = request.forms.get("response7")
+response8 = request.forms.get("response8")
+response9 = request.forms.get("response9")
+
+responseArray = [response1, response2, response3, response4, response5, response6, response7, response8, response9]
+comparisonScore = []
+for x in responseArray:
+    if responseArray[l] == 'Yes':
+        responseArray[l] = (1,)
+        l = l + 1
+    else:
+        responseArray[l] = (2,)
+        l = l + 1
+end
+end
+
+count = c.execute("SELECT name FROM personalInfo")
+for result in count:
+    m = m + 1
+end
+
+while i <= m:
+    result = c.execute("SELECT responseOneID FROM responseLink WHERE personalInfoID = ?", (i,))
+    responseOne = result.fetchall()
+    if responseOne[0] == responseArray[0]:
+      compareScore += 1
+        if responseOne[1] == responseArray[1]:
+            compareScore += 1
+            if responseOne[2] == responseArray[2]:
+                compareScore += 1
+    end
+        end
+            end
+    result2 = c.execute("SELECT responseTwoID FROM responseLink WHERE personalInfoID = ?", (i,))
+    responseTwo = result.fetchall()
+    if responseTwo[0] == responseArray[3]:
+        compareScore += 1
+            if responseTwo[1] == responseArray[4]:
+                compareScore += 1
+                    if responseTwo[2] == responseArray[5]:
+                        compareScore += 1
+    end
+        end
+            end
+    result3 = c.execute("SELECT responseThreeID FROM responseLink WHERE personalInfoID = ?", (i,))
+    responseThree = result.fetchall()
+    if responseThree[0] == responseArray[6]:
+        compareScore += 1
+            if responseThree[1] == responseArray[7]:
+                compareScore += 1
+                    if responseThree[2] == responseArray[8]:
+                        compareScore += 1
+    end
+        end
+            end
+    i += 1
+    comparisonScore.append(compareScore)
+    compareScore = 0
+end
+matchScore = max(comparisonScore)
+match = comparisonScore.index(matchScore)
+match = match + 1
+
+result = c.execute("SELECT * FROM personalInfo WHERE personalInfo.ID = ?", (match,))
+result = result.fetchall()
+result2 = c.execute("SELECT * FROM biography WHERE biography.ID = ?", (match,))
+result2 = result2.fetchall()
+
+result3 = c.execute("SELECT partyID FROM aggregateAccount WHERE personalInfoID = ?", (match,))
+party = result3.fetchone()[0]
+party = int(party)
+
+partyResult = c.execute("SELECT name FROM party WHERE party.ID = ?", (party,))
+partyResult = partyResult.fetchone()[0]
+%>
+<!DOCTYPE html>
+<html lang = "en-us">
+<head>
+ <link rel="stylesheet"
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="/static/politicianTheme.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="/static/politicianTheme.css" />
+
+</head>
+<body>
+    <div data-role = "page" data-theme = "a" >
+     <div data-role = "header" data-position = "fixed">
+    <h1>{{userName}} matched</h1>
+    </div>
+    <ul data-role = "listview">
+    %for result in result:
+        <li>{{result[1]}}</li>
+        <li>{{result[2]}}</li>
+        <li>{{result[3]}}</li>
+        %end
+    %for result in result2:
+        <li>{{result[1]}}</li>
+    %end
+        <li>{{partyResult}}</li>
+    </ul>
+     <button type = "button"
+            onclick = "document.location.href = '/'">
+        Want to try again?
+    </button>
+</body>
+
+</html>

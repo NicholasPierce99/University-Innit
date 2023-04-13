@@ -1,0 +1,35 @@
+I=imread('iris1.bmp');
+BW1 = edge(I,'Canny');
+imshow(BW1);
+radii = 30:1:45;
+h = circle_hough(BW1, radii, 'same', 'normalise');
+peaks = circle_houghpeaks(h, radii, 'nhoodxy', 15, 'nhoodr', 21, 'npeaks', 1);
+imshow(I);
+hold on;
+peak = peaks;
+[x, y] = circlepoints(peak(3));
+plot(x+peak(1), y+peak(2), 'g-');
+
+hold off
+imshow(I);
+a=peak(1);
+b=peak(2);
+c=peak(3);
+m = createCirclesMask(I, [345, 220], 35);
+
+seg = chenvese(I,m,500,0.02,'chan'); % ability on gray image
+%-- End 
+%imshow(seg);
+seg = imresize(seg, size(I));
+
+new_img = seg - m;
+
+imshow(new_img);
+
+polarCoordinates = [];
+
+cent = size(new_img)./2;
+[rr,cc] = meshgrid(1:size(new_img,1),1:size(new_img,2));
+[TH,R,Z] = cart2pol(rr(:)-cent(1),cc(:)-cent(2),new_img(:));
+polarCoordinates = [TH R Z];
+disp
